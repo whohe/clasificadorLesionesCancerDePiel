@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Healthy Skin Team</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+	<ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">{{ folder }}</ion-title>
+		</ion-toolbar>
+	</ion-header>
+
+    <ion-toast trigger="open-toast" message="This toast will disappear after 5 seconds" [duration]="5000"></ion-toast>
+	<div id="container" *ngIf="images.length == 0">
+		<strong class="capitalize">Healthy Skin Team</strong>
+		<p>Explore <a rel="noopener noreferrer" href="#">Scanner para lesiones de piel.</a></p>
+	</div>
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12" *ngFor="let image of images; index as i">
+				<ion-img [src]="image.webPath"></ion-img>
+				<button class="delete-button" (click)="deleteImage(i)">x</button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-button expand="full"  slot="fixed" class="bottom-button" *ngIf="images.length != 0"  (click)="send()">Validar Contra Modelo Neuronal</ion-button>
+	<ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="images.length == 0">
+		<ion-fab-button>
+			<ion-icon name="add"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-list side="start">
+			<ion-fab-button (click)="addNewToGallery()">
+				<ion-icon name="camera"></ion-icon>
+			</ion-fab-button>
+		</ion-fab-list>
+		<ion-fab-list side="end">
+			<ion-fab-button (click)="pickImages()">
+				<ion-icon name="images"></ion-icon>
+			</ion-fab-button>
+		</ion-fab-list>
+	</ion-fab>
+</ion-content>

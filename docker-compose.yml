@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  app:
+    build:
+      context: "$PWD"
+      dockerfile: Dockerfile
+    volumes:
+     - ./HealthySkinApp:/home/node
+     - /tmp/.X11-unix:/tmp/.X11-unix
+    ports:
+     - 8100:8100
+    restart: always
+    tty: true
+    stdin_open: true
+    environment:
+     - DISPLAY=$DISPLAY
+    privileged: true
+  back:
+    build: 
+      context: "$PWD"
+      dockerfile: back.Dockerfile
+    volumes:
+     - ./BackendModeloNeuronal/:/home/who
+     - /tmp/.X11-unix:/tmp/.X11-unix
+    ports:
+      - 5000:5000
+    environment:
+     - DISPLAY=$DISPLAY
+    restart: always
+    tty: true
+    stdin_open: true
