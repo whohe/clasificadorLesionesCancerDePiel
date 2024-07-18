@@ -96,7 +96,7 @@ export class FolderPage implements OnInit {
   		});
 			this.blobToBase64(blob).then(base64 => {
   			let jsonString = {file: String(base64)}
-				this.http.post('https://bcradio.sytes.net/api/upload', jsonString, { headers: headers, withCredentials: false })
+				this.http.post('https://bcradio.sytes.net/api', jsonString, { headers: headers, withCredentials: false })
 				.subscribe((response:any) => {
 					this.presentToast(response.msg);
 					console.log('Imagen subida correctamente:', response);
